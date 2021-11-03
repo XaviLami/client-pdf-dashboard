@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CountryService } from '../common/services/country.service';
+import { Country } from '../common/interfaces/country.interface';
 
 @Component({
   selector: 'app-country-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryListComponent implements OnInit {
 
-  constructor() { }
+  countries: Country[] = [];
+
+  constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
+    this.countryService.list().subscribe((res) => {
+      //Get seggregations[id] === "flagList";
+      //console.log(res.aggregations[1].datasets[0].data) //object
+
+      const apiCountries: { icon: string; initiativeCount: number; label: string; uri: string; value: number; link: any }[] = res.aggregations[1].datasets[0].data
+
+      return this.countries = apiCountries.map((apiCountry) => ({
+        label: apiCountry.label,
+        uri: apiCountry.uri
+      }))
+
+      console.log(this.countries)
+    });
   }
 
 }

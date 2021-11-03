@@ -1,1 +1,5 @@
-<p>country-list works!</p>
+<ul>
+    <li *ngFor="let country of countries"> Label : {{country.label}} --- URI : {{country.uri}}
+        <button class="button"> More</button>
+    </li><br>
+</ul>
