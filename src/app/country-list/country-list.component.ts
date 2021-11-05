@@ -18,15 +18,15 @@ export class CountryListComponent implements OnInit {
       //Get seggregations[id] === "flagList";
       //console.log(res.aggregations[1].datasets[0].data) //object
 
-      const apiCountries: { icon: string; initiativeCount: number; label: string; uri: string; value: number; link: any }[] = res.aggregations[1].datasets[0].data
+      const apiCountries: { icon: string; initiativeCount: number; label: string; uri: string; value: number; link: any; id: string }[] = res.aggregations[1].datasets[0].data
 
       return this.countries = apiCountries.map((apiCountry) => ({
+        id: apiCountry.uri.split('#')[1],
         label: apiCountry.label,
-        uri: apiCountry.uri
+        uri: apiCountry.uri,
+        name: apiCountry.label
       }))
-
-      console.log(this.countries)
     });
-  }
 
+  }
 }

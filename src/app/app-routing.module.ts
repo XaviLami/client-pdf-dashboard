@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { CountryListComponent } from './country-list/country-list.component';
 
 const routes: Routes = [
-  { path: 'list', component: CountryListComponent }
+  { path: 'list', component: CountryListComponent },
+  { path: 'detail/:id', component: CountryDetailComponent }
 ];
 
 @NgModule({

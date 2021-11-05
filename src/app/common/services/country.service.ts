@@ -13,13 +13,14 @@ export class CountryService {
   constructor(private http: HttpClient) { }
 
 
-  url = "https://stip-pp.oecd.org/ws/STIP/API/dashboards/main.xqy?portal=primary";
+
 
   list(): Observable<any> {
-    return this.http.get(this.url);
+    return this.http.get("https://stip-pp.oecd.org/ws/STIP/API/dashboards/main.xqy?portal=primary");
 
   }
-  show(label: string): Observable<any> {
-    return this.http.get(this.url)
+  show(id: string): Observable<any> {
+    console.log(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`)
+    return this.http.get(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`);
   }
 }

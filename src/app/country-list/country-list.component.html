@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let country of countries"> Label : {{country.label}} --- URI : {{country.uri}}
-        <button class="button"> More</button>
+    <li *ngFor="let country of countries"> Label : {{country.label}} --- URI : {{country.uri}} --- ID: {{country.id}}
+        <button class="button" [routerLink]="'/detail/'+ country.id"> More</button>
     </li><br>
 </ul>
