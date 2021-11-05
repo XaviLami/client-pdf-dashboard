@@ -17,6 +17,7 @@ export class CountryDetailComponent implements OnInit {
     name: ''
   };
 
+
   constructor(private countryService: CountryService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -25,6 +26,11 @@ export class CountryDetailComponent implements OnInit {
       this.country = res;
       console.log(this.country)
     })
+  }
+
+  getPdf(id: string) {
+    console.log(this.countryService.getCountryPdf(id))
+    this.countryService.getCountryPdf(id)
   }
 
 }

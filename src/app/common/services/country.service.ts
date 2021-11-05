@@ -20,7 +20,11 @@ export class CountryService {
 
   }
   show(id: string): Observable<any> {
-    console.log(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`)
+    //console.log(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`)
     return this.http.get(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`);
+  }
+
+  getCountryPdf(id: string): Observable<{ filePath: string }> {
+    return this.http.get(`http://localhost:3000/countries/${id}`) as Observable<{ filePath: string }>
   }
 }
