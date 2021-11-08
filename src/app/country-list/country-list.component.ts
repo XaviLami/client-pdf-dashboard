@@ -15,8 +15,6 @@ export class CountryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryService.list().subscribe((res) => {
-      //Get seggregations[id] === "flagList";
-      //console.log(res.aggregations[1].datasets[0].data) //object
 
       const apiCountries: { icon: string; initiativeCount: number; label: string; uri: string; value: number; link: any; id: string }[] = res.aggregations[1].datasets[0].data
 

@@ -1,6 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Country } from '../interfaces/country.interface';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
@@ -20,7 +19,6 @@ export class CountryService {
 
   }
   show(id: string): Observable<any> {
-    //console.log(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`)
     return this.http.get(`https://stip-pp.oecd.org/ws/STIP/API/dashboards/country.xqy?portal=primary&uri=http://kim.oecd.org/Taxonomy/GeographicalAreas%23${id}`);
   }
 

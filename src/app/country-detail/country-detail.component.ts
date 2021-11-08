@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../common/services/country.service';
-import { ActivatedRoute } from '@angular/router';
-import { Country } from '../common/interfaces/country.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+
+import { Country } from '../common/interfaces/country.interface';
+import { CountryService } from '../common/services/country.service';
 
 @Component({
   selector: 'app-country-detail',
@@ -11,6 +12,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./country-detail.component.css']
 })
 export class CountryDetailComponent implements OnInit {
+
+  loading: boolean = false;
 
   country: Country = {
     label: '',
@@ -20,7 +23,7 @@ export class CountryDetailComponent implements OnInit {
   };
 
 
-  constructor(private countryService: CountryService, private route: ActivatedRoute, private spinner: NgxSpinnerService) { }
+  constructor(private countryService: CountryService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
@@ -30,11 +33,15 @@ export class CountryDetailComponent implements OnInit {
     })
   }
 
+
   getPdf(id: string) {
+    this.loading = true
+
     this.countryService.generateCountryPdf(id).toPromise().then((res) => {
-      console.log(res)
-      const windowOpen = window.open(res.filePath, 'New')
+      this.loading = false;
+      window.open(res.filePath, 'NewWindow')
     }, (err: HttpErrorResponse) => {
+      this.loading = false;
       console.log(err)
       if (err.status === 404) {
         alert('Error 404')
