@@ -2,7 +2,7 @@
 <div class="spinner" *ngIf="loading">Loading...</div>
 <ul>
     <li>
-        <p>{{country.label}} <button class="button" (click)="getPdf(country.label)">Download PDF</button>
+        <p>{{country.label}} <button class="button" (click)="getPdf(country.id)">Download PDF</button>
         </p>
     </li>
 </ul>

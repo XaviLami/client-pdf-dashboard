@@ -30,6 +30,7 @@ export class CountryDetailComponent implements OnInit {
     this.countryService.show(id).subscribe((res) => {
       this.country = res;
 
+
     })
   }
 
