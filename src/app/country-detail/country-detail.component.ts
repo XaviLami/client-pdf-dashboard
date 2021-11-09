@@ -1,10 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, Params } from '@angular/router'
 
-
-import { Country } from '../common/interfaces/country.interface';
-import { CountryService } from '../common/services/country.service';
+import { Country } from '../common/interfaces/country.interface'
+import { CountryService } from '../common/services/country.service'
 
 @Component({
   selector: 'app-country-detail',
@@ -12,44 +11,44 @@ import { CountryService } from '../common/services/country.service';
   styleUrls: ['./country-detail.component.css']
 })
 export class CountryDetailComponent implements OnInit {
+  loading: boolean = false
 
-  loading: boolean = false;
+  country: Country
 
-  country: Country = {
-    label: '',
-    id: '',
-    uri: '',
-    name: ''
-  };
-
-
-  constructor(private countryService: CountryService, private route: ActivatedRoute) { }
+  constructor(
+    private countryService: CountryService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.countryService.show(id).subscribe((res) => {
-      this.country = res;
-
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.countryService.show(params.id).subscribe((res) => {
+        this.country = res
+      })
     })
   }
-
 
   getPdf(id: string) {
     this.loading = true
 
-    this.countryService.generateCountryPdf(id).toPromise().then((res) => {
-      this.loading = false;
-      window.open(res.filePath, 'NewWindow')
-    }, (err: HttpErrorResponse) => {
-      this.loading = false;
-      console.log(err)
-      if (err.status === 404) {
-        alert('Error 404')
-      } else if (err.status != 404) {
-        alert(`You have error ${err.status} please contact us for more information`)
-      }
-
-    })
+    this.countryService
+      .generateCountryPdf(id)
+      .toPromise()
+      .then(
+        (res: { filePath: string }) => {
+          this.loading = false
+          window.open(res.filePath)
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false
+          if (err.status === 404) {
+            alert('Error 404')
+          } else {
+            alert(
+              `You have error ${err.status} please contact us for more information`
+            )
+          }
+        }
+      )
   }
-
 }

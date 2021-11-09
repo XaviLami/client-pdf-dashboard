@@ -1,8 +1,24 @@
-<h1>Country Detail Title</h1> <br>
-<div class="spinner" *ngIf="loading">Loading...</div>
-<ul>
-    <li>
-        <p>{{country.label}} <button class="button" (click)="getPdf(country.label)">Download PDF</button>
-        </p>
-    </li>
-</ul>
+<br /><br /><br /><br />
+<div class="container">
+  <div class="columns">
+    <div class="columns">
+      <h1 class="title is-1" *ngIf="country">{{ country.label }}</h1>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <p>
+        <button
+          class="button is-success"
+          [ngClass]="{
+            'is-loading': loading
+          }"
+          (click)="getPdf(country.label)"
+        >
+          Download PDF
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../common/services/country.service';
-import { Country } from '../common/interfaces/country.interface';
+import { Component, OnInit } from '@angular/core'
+import { ApiCountry } from '../common/interfaces/api-country.interface'
+
+import { Country } from '../common/interfaces/country.interface'
+import { CountryService } from '../common/services/country.service'
 
 @Component({
   selector: 'app-country-list',
@@ -8,23 +10,19 @@ import { Country } from '../common/interfaces/country.interface';
   styleUrls: ['./country-list.component.css']
 })
 export class CountryListComponent implements OnInit {
+  countries: Country[] = []
 
-  countries: Country[] = [];
-
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService) {}
 
   ngOnInit(): void {
     this.countryService.list().subscribe((res) => {
+      const apiCountries: ApiCountry[] = res.aggregations[1].datasets[0].data
 
-      const apiCountries: { icon: string; initiativeCount: number; label: string; uri: string; value: number; link: any; id: string }[] = res.aggregations[1].datasets[0].data
-
-      return this.countries = apiCountries.map((apiCountry) => ({
+      this.countries = apiCountries.map((apiCountry: ApiCountry) => ({
         id: apiCountry.uri.split('#')[1],
         label: apiCountry.label,
-        uri: apiCountry.uri,
-        name: apiCountry.label
+        uri: apiCountry.uri
       }))
-    });
-
+    })
   }
 }

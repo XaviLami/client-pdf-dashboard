@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
-};
+  production: true,
+  countryApiBaseUrl: 'https://stip-pp.oecd.org/ws/STIP/API/dashboards'
+}
