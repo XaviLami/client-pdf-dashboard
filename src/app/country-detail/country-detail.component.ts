@@ -29,7 +29,7 @@ export class CountryDetailComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.countryService.show(id).subscribe((res) => {
       this.country = res;
-      console.log(this.country)
+
     })
   }
 
