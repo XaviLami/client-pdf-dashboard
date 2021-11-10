@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let country of countries">
+    Label : {{ country.label }} --- URI : {{ country.uri }} --- ID:
+    {{ country.id }}
+    <button class="button" [routerLink]="['/countries', country.id]">
+      More
+    </button>
+  </li>
+  <br />
+</ul>

@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  countryApiBaseUrl: 'https://stip-pp.oecd.org/ws/STIP/API/dashboards'
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
